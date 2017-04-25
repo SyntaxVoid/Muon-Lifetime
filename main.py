@@ -2,6 +2,10 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from copy import deepcopy
+
+def midp(x):
+    return 0.5 * (max(x) + min(x))
+
 class PMT:
     def __init__(self, hv, cts):
         self.hv = deepcopy(hv)
@@ -37,7 +41,8 @@ class PMT:
         plt.plot([plat_hv, plat_hv],[self.cts[0], self.cts[-1]], linewidth = 5)
         plt.grid()
         plt.legend(["Counts vs. Voltage","Plateau","Plateau Voltage"])
-        plt.text(plat_hv, self.cts[-1], "Plateau Voltage = {} kV".format(plat_hv), size=50)
+        plt.text(0.05 + plat_hv, midp(self.cts), "Plateau Voltage = {} kV\nPlateau Counts = {}"\
+                 .format(plat_hv, plat_cts), size=50)
         plt.xlabel("PMT Voltage (kV)")
         plt.ylabel("Counts per 60 seconds")
         plt.title(title)
@@ -72,7 +77,14 @@ if __name__ == '__main__':
             6677, 7137, 7539, 8137, 8825, 9948, 11488, 13889, 15846, 21504]
     PMT3 = PMT(hv3,cts3)
 
+
+    ## Second attempt at discriminator 1. v_dis = 1.508 V
+    hv1 = [1.178, 1.188, 1.200, 1.212, 1.221, 1.237, 1.247, 1.257, 1.267, 1.277, 1.287,
+           1.300, 1.312, 1.322, 1.351, 1.400, 1.451, 1.500, 1.550, 1.665, 1.700]
+    cts1 = [3,2,3,3,8,11, 3,9,8,11,13,12,14,21,37,54,124,181,328,572,869]
+    PMTxx = PMT(hv1,cts1)
+    PMTxx.plot_plateau(title=r"$PMT_1 --- v_{dis} = 1.508 V$")
     ### Analysis
-    PMT1.plot_plateau(title="PMT 1 -- v_dis = 1.508 V")
-    PMT2.plot_plateau(title="PMT 2 -- v_dis = 1.505 V")
-    PMT3.plot_plateau(title="PMT 3 -- v_dis = 1.509 V")
+    #PMT1.plot_plateau(title=r"$PMT 1 -- v_{dis} = 1.508 V")
+    #PMT2.plot_plateau(title=r"$PMT 2 -- v_{dis} = 1.505 V")
+    #PMT3.plot_plateau(title=r"$PMT 3 -- v_{dis} = 1.509 V")
