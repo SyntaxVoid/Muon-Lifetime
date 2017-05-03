@@ -3,6 +3,21 @@ import matplotlib.pyplot as plt
 import numpy as np
 from copy import deepcopy
 
+def read_SPE(f, data_start=12, data_end=None, stepping=2):
+    histx = []
+    histy = []
+    with open(f,"r") as histo:
+        for line_num,data in enumerate(histo.readlines()):
+           if line_num < 12:
+               # Skip the header information
+
+               continue
+
+    return
+
+
+
+
 def midp(x):
     return 0.5 * (max(x) + min(x))
 
@@ -82,9 +97,12 @@ if __name__ == '__main__':
     hv1 = [1.178, 1.188, 1.200, 1.212, 1.221, 1.237, 1.247, 1.257, 1.267, 1.277, 1.287,
            1.300, 1.312, 1.322, 1.351, 1.400, 1.451, 1.500, 1.550, 1.665, 1.700]
     cts1 = [3,2,3,3,8,11, 3,9,8,11,13,12,14,21,37,54,124,181,328,572,869]
-    PMTxx = PMT(hv1,cts1)
-    PMTxx.plot_plateau(title=r"$PMT_1 --- v_{dis} = 1.508 V$")
+
+    #PMTxx = PMT(hv1,cts1)
+    #PMTxx.plot_plateau(title=r"$PMT_1 --- v_{dis} = 1.508 V$")
     ### Analysis
     #PMT1.plot_plateau(title=r"$PMT 1 -- v_{dis} = 1.508 V")
     #PMT2.plot_plateau(title=r"$PMT 2 -- v_{dis} = 1.505 V")
     #PMT3.plot_plateau(title=r"$PMT 3 -- v_{dis} = 1.509 V")
+
+    read_SPE("muon_data.spe")
