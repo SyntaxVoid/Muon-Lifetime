@@ -2,19 +2,65 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from copy import deepcopy
+from scipy import optimize
 
-def read_SPE(f, data_start=12, data_end=None, stepping=2):
+
+def read_SPE(f, data_start=12, data_end=None, stepping=1):
     histx = []
     histy = []
+    x_start = 1
+    i = 0
     with open(f,"r") as histo:
         for line_num,data in enumerate(histo.readlines()):
-           if line_num < 12:
-               # Skip the header information
+            if line_num > 12:
+                # Skip the header information
+                if data[0] == "$":
+                    break
+                histx.append(x_start+stepping*i)
+                i+=1
+                histy.append(int(data.strip()))
+    return histx, histy
 
-               continue
+def kev_to_us(x,factor=1/420):
+    x = np.array(x)
+    return x*factor
 
+
+def fit_exponential(x,y):
+    #fit = np.polyfit(-x, np.log(y), 1)
+    #def f(t):
+    #    return fit[0]*np.log(t)+fit[1]
+    #fity = []
+    #for tmp in x:
+    #    fity.append(f(tmp))
+    def theory(t,tau):
+        return y[0] * np.exp((-(t-48/420))/tau)
+    xth = np.linspace(0,1,100)
+    yth = theory(xth,0.02)
+    print(y[0],max(y))
+    y1 = []
+    y2 = []
+    y3 = []
+    for i in x:
+        y1.append(theory(i,2.2))
+        y2.append(theory(i,1.0))
+        y3.append(theory(i,3.5))
+    plt.plot(x,y,"b*",xth,yth,"b-")
+    plt.xlim([0,1])
+    plt.ylim([0,6000])
+    #plt.plot(x,y1,"r-")
+    #plt.plot(x,y2,"g-")
+    #plt.plot(x,y3,"k-")
+    print(y1)
+    print(x[0])
+    plt.legend(["Data","1"])#,"2","3"])
+    #plt.plot(x,fity,"r-")
+    plt.show()
+    #plt.plot(x,fit)
+    #fitx,fity = optimize.curve_fit(lambda t,a,b: a*np.exp(b*t),x,y)
+    #plt.plot(fitx,fity)
+    #plt.grd
     return
-
 
 
 
@@ -98,6 +144,11 @@ if __name__ == '__main__':
            1.300, 1.312, 1.322, 1.351, 1.400, 1.451, 1.500, 1.550, 1.665, 1.700]
     cts1 = [3,2,3,3,8,11, 3,9,8,11,13,12,14,21,37,54,124,181,328,572,869]
 
+    ## To find the plateau:
+    # PMT1 = PMT(hv3,cts3)
+    # PMT1.plot_plateau(title="Put your title here.")
+    ##
+
     #PMTxx = PMT(hv1,cts1)
     #PMTxx.plot_plateau(title=r"$PMT_1 --- v_{dis} = 1.508 V$")
     ### Analysis
@@ -105,4 +156,21 @@ if __name__ == '__main__':
     #PMT2.plot_plateau(title=r"$PMT 2 -- v_{dis} = 1.505 V")
     #PMT3.plot_plateau(title=r"$PMT 3 -- v_{dis} = 1.509 V")
 
-    read_SPE("muon_data.spe")
+    x,y = read_SPE("muon_data.spe")
+    x = np.array(x)
+    y = np.array(y)
+    #fit_exponential(x,y)
+    #plt.plot(x,y)
+    #plt.grid()
+    #plt.show()
+
+    # trim x and y
+    xnew = []
+    ynew = []
+    for n,i in enumerate(x):
+        if i < 101 and i > 48:
+            xnew.append(x[n])
+            ynew.append(y[n])
+    xnew = kev_to_us(xnew,factor=1/420)
+    fit_exponential(xnew,ynew)
+
