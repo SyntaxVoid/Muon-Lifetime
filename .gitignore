@@ -1,2 +1,5 @@
 .gitignore
-
+.idea/*
+tests.py
+__pycache__/
+tmp.txt
