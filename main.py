@@ -6,15 +6,21 @@ from PMT import *
 
 
 # noinspection PyInterpreter
-def ty_to_mathematica(x,y,out):
+def ty_to_mathematica(t, y, out, verbose=False):
     ## Writes t and y to a file (out) in a format that can be read by Mathematica.
     ## Mathematica syntax for reading the data in:
     ## In[1]:  data = Import[NotebookDirectory[]<>"your_file_name_here","Table"]
     ## Out[1]: {{t1,y1}, {t2,y2}, ... , {tn,yn}}
-    with open(out,"w") as o:
-        for a,b in zip(x,y):
-            o.write("{} {}\n".format(a,b))
+    with open(out, "w") as o:
+        for a,b in zip(t,y):
+            o.write("{} {}\n".format(a, b))
+    if verbose:
+        print("\tWrote a total of {} events to {}.".format(count_events(y), out))
     return
+
+
+def count_events(y):
+    return sum(y)
 
 
 def find_max(arr):
@@ -22,17 +28,13 @@ def find_max(arr):
     ## Will only return index of the FIRST maximum.
     return max(enumerate(arr), key=operator.itemgetter(1))
 
-def LaTex_Parser(s):
-    # Returns a lambda function from the LaTex version of the function in the string, s
-
-    return
-
 
 def keV_to_mus(n, factor = 1/420):
     ## Converts the number, n, from keV to microseconds.
     ## Maestro provides a histogram with the x-axis in keV, but we would
     ## prefer a histogram of microseconds. We found that a 2 microsecond
-    ## delay corresponds to 840 keV. Then 1 keV = 1/420 microseconds.
+    ## delay corresponds to 840 keV. So 1 keV = 1/420 micro seconds, the
+    ## default value for 'factor'.
     return n*factor
 
 
@@ -199,4 +201,4 @@ if __name__ == '__main__':
         b = bins_to_midp(b)
         # Want to skip the first two bins.. Maybe theres an argument for this later...
         b,v = b[2:],v[2:]
-        ty_to_mathematica(b, v, "Mathematica_format.txt")
+        ty_to_mathematica(b, v, "mathematica_format.txt", verbose=True)
