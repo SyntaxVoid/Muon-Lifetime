@@ -131,8 +131,8 @@ if __name__ == '__main__':
     ## Set values to either true or false to specify which
     ## parts of the analysis you would like to run.
 
-    PLOT_PLATEAUS  = False
-    PLOT_HISTOGRAM = True
+    PLOT_PLATEAUS      = False
+    EXPORT_MATHEMATICA = True
 
     ##
     ##
@@ -193,13 +193,10 @@ if __name__ == '__main__':
         PMT1_2.plot_plateau(title=r"$PMT 1 -- v_{dis} = 1.508 V")
 
 
-    if PLOT_HISTOGRAM:
+    if EXPORT_MATHEMATICA:
         t, y = read_SPE("muon_data.spe")
-        b, v = bin_rough(t, y, n_bins=10)
+        b, v = bin_rough(t, y, n_bins=40)
         b = bins_to_midp(b)
         # Want to skip the first two bins.. Maybe theres an argument for this later...
         b,v = b[2:],v[2:]
-        ax = plot_histogram(b, v, title="Muon Decay Histogram")
-        # Plot the histogram
-        # ty_to_mathematica(b, v, "Mathematica_format.txt")
-        plt.show()
+        ty_to_mathematica(b, v, "Mathematica_format.txt")
