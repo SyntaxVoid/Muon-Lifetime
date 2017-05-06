@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    141323,       3014]
-NotebookOptionsPosition[    140969,       2997]
-NotebookOutlinePosition[    141342,       3013]
-CellTagsIndexPosition[    141299,       3010]
+NotebookDataLength[    141437,       3016]
+NotebookOptionsPosition[    141083,       2999]
+NotebookOutlinePosition[    141456,       3015]
+CellTagsIndexPosition[    141413,       3012]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -253,14 +253,14 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{
      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
-     "\"\<MuonLifetimePlot.svg\>\""}], ",", "finalplot", ",", " ", 
+     "\"\<Plots/MuonLifetimePlot.svg\>\""}], ",", "finalplot", ",", " ", 
     "\"\<SVG\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Export", "[", 
    RowBox[{
     RowBox[{
      RowBox[{"NotebookDirectory", "[", "]"}], "<>", 
-     "\"\<MuonLifetimePlot.png\>\""}], ",", "finalplot", ",", " ", 
+     "\"\<Plots/MuonLifetimePlot.png\>\""}], ",", "finalplot", ",", " ", 
     "\"\<PNG\>\""}], "]"}], ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.7028793883253803`*^9, 3.702879416512969*^9}, {
    3.702879524151043*^9, 3.7028795291655245`*^9}, {3.7028797110690765`*^9, 
@@ -311,7 +311,8 @@ Cell[BoxData[{
    3.7030525520637283`*^9, 3.7030525560108624`*^9}, {3.703052586914589*^9, 
    3.703052633209799*^9}, {3.7030527235441165`*^9, 3.7030527383870983`*^9}, {
    3.703052777144512*^9, 3.703052837756104*^9}, {3.7030529159775057`*^9, 
-   3.70305293939908*^9}, {3.7030530798980246`*^9, 3.703053097228984*^9}}],
+   3.70305293939908*^9}, {3.7030530798980246`*^9, 3.703053097228984*^9}, {
+   3.7030536518531933`*^9, 3.703053671315427*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -2992,7 +2993,8 @@ riyj4Z9QBSMo6APxPJXXg7zR8C+oK8O/0gfj+d/79L1PX7lP76TRpBs=
    3.703052264776978*^9, 3.7030522766846123`*^9}, 3.703052502442263*^9, 
    3.703052556855632*^9, {3.703052587487805*^9, 3.703052661004176*^9}, {
    3.7030527128295326`*^9, 3.7030528382695665`*^9}, {3.7030529170364532`*^9, 
-   3.703052940070871*^9}, {3.703053080862974*^9, 3.7030531081575837`*^9}}]
+   3.703052940070871*^9}, {3.703053080862974*^9, 3.7030531081575837`*^9}, {
+   3.703053661302082*^9, 3.703053672535334*^9}}]
 }, Open  ]]
 },
 WindowSize->{1278, 1348},
@@ -3013,8 +3015,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 12091, 291, 1414, "Input"],
-Cell[12674, 315, 128279, 2679, 511, "Output"]
+Cell[580, 22, 12155, 292, 1392, "Input"],
+Cell[12738, 316, 128329, 2680, 489, "Output"]
 }, Open  ]]
 }
 ]
