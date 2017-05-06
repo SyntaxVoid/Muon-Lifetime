@@ -4,28 +4,28 @@ import operator
 
 from PMT import *
 
+
+# noinspection PyInterpreter
 def ty_to_mathematica(x,y,out):
+    ## Writes t and y to a file (out) in a format that can be read by Mathematica.
+    ## Mathematica syntax for reading the data in:
+    ## In[1]:  data = Import[NotebookDirectory[]<>"your_file_name_here","Table"]
+    ## Out[1]: {{t1,y1}, {t2,y2}, ... , {tn,yn}}
     with open(out,"w") as o:
         for a,b in zip(x,y):
             o.write("{} {}\n".format(a,b))
     return
-    # with open(out,"w") as o:
-    #     o.write("{")
-    #     start = 1
-    #     for a,b in zip(x,y):
-    #         if start:
-    #             o.write("{{{},{}}}".format(a,b))
-    #             start = 0
-    #         else:
-    #             o.write(",{{{},{}}}".format(a, b))
-    #     o.write("}")
-    # return
 
 
 def find_max(arr):
     ## Returns a tuple containing the index of the maximum, and the maximum itself. (index, val)
     ## Will only return index of the FIRST maximum.
     return max(enumerate(arr), key=operator.itemgetter(1))
+
+def LaTex_Parser(s):
+    # Returns a lambda function from the LaTex version of the function in the string, s
+
+    return
 
 
 def keV_to_mus(n, factor = 1/420):
@@ -70,18 +70,6 @@ def bins_to_midp(bins):
         out[b] = midpoint(bins[b+1],bins[b])
     return out
 
-def plot_histogram(t,y,title="Histogram Title"):
-    #plt.plot(t,y,"b*")
-    #plt.hist(y, bins=[0,1,2,3,4,5,6,7,8,9,10])
-
-    plt.bar(b,v, width=0.6)
-    plt.xlabel(r"Decay Time ($\mu$s)")
-    plt.ylabel("Counts")
-    plt.title(title)
-    plt.xlim([1.1, 5])
-    plt.ylim([0,2000])
-    #plt.ylim([min(y),max(y)*1.05])
-    return plt.gca()
 
 def read_SPE(f):
     ## Reads in data from a Maestro .spe text file and returns arrays of
@@ -117,70 +105,38 @@ def read_SPE(f):
                 index += 1
     return t,y
 
-def fit_exponential2(t, y, ax):
-    ind,ymax = find_max(y)
-    tmax = t[ind]
-    ymax = 1000
-    def lifetime(tau):
-        return lambda t: ymax * np.exp( (tmax-t) / tau )
+def plot_histogram(t, y, title="Title", ax = None):
+    if ax is not None:
+        plt.sca(ax) ## Sets the current axis to whatever ax is
+    plt.plot(t, y, "bo")
+    plt.title(title)
+    plt.xlabel(r"Muon Decay Time ($\mu$s)")
+    plt.ylabel("Counts")
+    plt.xlim([0,5])
+    plt.ylim([0,max(y)*1.3])
+    return plt.gca()
 
-    lifetime1 = lifetime(0.022)
-    lifetime2 = lifetime(0.10)
-    lifetime3 = lifetime(2.20)
+def nlm_fit(t):
+    ## Calculates the value from the NonlinearModelFit from Mathematica
+    a = 425.202
+    tau = 2.5867
+    return a * np.exp(-t/tau)
 
-    #ax.plot(x,lifetime1(x), "r-", linewidth=15)
-    ax.plot(x,lifetime3(x), "g-", linewidth=10)
+def plot_nlm_fit(ax = None):
     return
-
-
-
-def fit_exponential(x,y):
-    #fit = np.polyfit(-x, np.log(y), 1)
-    #def f(t):
-    #    return fit[0]*np.log(t)+fit[1]
-    #fity = []
-    #for tmp in x:
-    #    fity.append(f(tmp))
-    def theory(t,tau):
-        return y[0] * np.exp((-(t-48/420))/tau)
-    xth = np.array(np.linspace(0,1,100))
-    yth = theory(xth,0.02)
-    print(y[0],max(y))
-    y1 = []
-    y2 = []
-    y3 = []
-    for i in x:
-        y1.append(theory(i,2.2))
-        y2.append(theory(i,1.0))
-        y3.append(theory(i,3.5))
-    plt.plot(x,y,"b*",xth,yth,"b-")
-    plt.xlim([0,1])
-    plt.ylim([0,6000])
-    #plt.plot(x,y1,"r-")
-    #plt.plot(x,y2,"g-")
-    #plt.plot(x,y3,"k-")
-    print(y1)
-    print(x[0])
-    plt.legend(["Data","1"])#,"2","3"])
-    #plt.plot(x,fity,"r-")
-    plt.show()
-    #plt.plot(x,fit)
-    #fitx,fity = optimize.curve_fit(lambda t,a,b: a*np.exp(b*t),x,y)
-    #plt.plot(fitx,fity)
-    #plt.grd
-    return
-
-
-
 
 
 if __name__ == '__main__':
-    ###### CONTROLS ######
+    ################ CONTROLS ################
     ## Set values to either true or false to specify which
     ## parts of the analysis you would like to run.
 
     PLOT_PLATEAUS  = False
     PLOT_HISTOGRAM = True
+
+    ##
+    ##
+    ################ ######## ################
 
     ######################### PMT CALIBRATION ####################
     ## All counts (cts) are per 60 seconds.
@@ -239,15 +195,11 @@ if __name__ == '__main__':
 
     if PLOT_HISTOGRAM:
         t, y = read_SPE("muon_data.spe")
-
         b, v = bin_rough(t, y, n_bins=10)
         b = bins_to_midp(b)
         # Want to skip the first two bins.. Maybe theres an argument for this later...
         b,v = b[2:],v[2:]
-        ty_to_mathematica(b, v, "Mathematica_format.txt")
-
-        # ax = plot_histogram(t, y, title = "Muon decay time histogram")
-        # fit_exponential2(t, y, ax)
-        # plt.legend(["Data Points", "Theoretical"])
-        # plt.show()
-
+        ax = plot_histogram(b, v, title="Muon Decay Histogram")
+        # Plot the histogram
+        # ty_to_mathematica(b, v, "Mathematica_format.txt")
+        plt.show()
