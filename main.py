@@ -62,6 +62,7 @@ def bin_rough(t, y, n_bins=100):
         vals[b] += yy
     return bins, vals
 
+
 def midpoint(a,b):
     return 0.5 * (a+b)
 
@@ -106,26 +107,6 @@ def read_SPE(f):
                 y[index] = int(data_line.strip())
                 index += 1
     return t,y
-
-def plot_histogram(t, y, title="Title", ax = None):
-    if ax is not None:
-        plt.sca(ax) ## Sets the current axis to whatever ax is
-    plt.plot(t, y, "bo")
-    plt.title(title)
-    plt.xlabel(r"Muon Decay Time ($\mu$s)")
-    plt.ylabel("Counts")
-    plt.xlim([0,5])
-    plt.ylim([0,max(y)*1.3])
-    return plt.gca()
-
-def nlm_fit(t):
-    ## Calculates the value from the NonlinearModelFit from Mathematica
-    a = 425.202
-    tau = 2.5867
-    return a * np.exp(-t/tau)
-
-def plot_nlm_fit(ax = None):
-    return
 
 
 if __name__ == '__main__':
