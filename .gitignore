@@ -1,3 +1,6 @@
+osc_plots.py
+DiscriminatorVoltage.svg
 .gitignore
 .idea
 __pycache__
+*.tmp
