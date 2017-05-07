@@ -114,8 +114,8 @@ if __name__ == '__main__':
     ## Set values to either true or false to specify which
     ## parts of the analysis you would like to run.
 
-    PLOT_PLATEAUS      = False
-    EXPORT_MATHEMATICA = True
+    PLOT_PLATEAUS      = True
+    EXPORT_MATHEMATICA = False
 
     ##
     ##
@@ -170,10 +170,11 @@ if __name__ == '__main__':
 
     ##############################################################
     if PLOT_PLATEAUS:
-        PMT1.plot_plateau(  title=r"$PMT 1 -- v_{dis} = 1.508 V")
-        PMT2.plot_plateau(  title=r"$PMT 2 -- v_{dis} = 1.505 V")
-        PMT3.plot_plateau(  title=r"$PMT 3 -- v_{dis} = 1.509 V")
-        PMT1_2.plot_plateau(title=r"$PMT 1 -- v_{dis} = 1.508 V")
+        #PMT1.plot_plateau(  title=r"PMT 1 -- V$_{d}$ = -150 mV")
+        #PMT2.plot_plateau(  title=r"PMT 2 -- V$_{d}$ = -150 mV")
+        #PMT3.plot_plateau(  title=r"PMT 3 -- V$_{d}$ = -150 mV")
+        #PMT1_2.plot_plateau(title=r"PMT 1 -- V$_{d} = -150 mV")
+        pass
 
 
     if EXPORT_MATHEMATICA:
@@ -183,3 +184,4 @@ if __name__ == '__main__':
         # Want to skip the first two bins.. Maybe theres an argument for this later...
         b,v = b[2:],v[2:]
         ty_to_mathematica(b, v, "mathematica_format.txt", verbose=True)
+
