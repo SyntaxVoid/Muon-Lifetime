@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     33690,        731]
-NotebookOptionsPosition[     33341,        714]
-NotebookOutlinePosition[     33714,        730]
-CellTagsIndexPosition[     33671,        727]
+NotebookDataLength[     33773,        733]
+NotebookOptionsPosition[     33424,        716]
+NotebookOutlinePosition[     33797,        732]
+CellTagsIndexPosition[     33754,        729]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -141,10 +141,11 @@ Cell[BoxData[{
      RowBox[{"{", 
       RowBox[{
        RowBox[{"{", 
-        RowBox[{"\"\<Time Delay (ns)\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+        RowBox[{"\"\<Counts per 60 seconds\>\"", ",", "\"\<\>\""}], "}"}], 
+       ",", 
        RowBox[{"{", 
         RowBox[{
-        "\"\<Counts per 60 seconds\>\"", ",", 
+        "\"\<Time Delay (ns)\>\"", ",", 
          "\"\<\!\(\*SubscriptBox[\(S\), \(1\)]\) vs \!\(\*SubscriptBox[\(S\), \
 \(3\)]\)\>\""}], "}"}]}], "}"}]}]}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
@@ -164,7 +165,8 @@ Cell[BoxData[{
  CellChangeTimes->{{3.703139943194709*^9, 3.7031405420148897`*^9}, {
   3.7031405888975334`*^9, 3.7031407401534977`*^9}, {3.7031407996017666`*^9, 
   3.703141073775112*^9}, {3.703141132908143*^9, 3.7031411663366766`*^9}, {
-  3.703141212700369*^9, 3.7031413074479094`*^9}}],
+  3.703141212700369*^9, 3.7031413074479094`*^9}, {3.7031416106406407`*^9, 
+  3.703141615542076*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -514,9 +516,9 @@ peR/QrBPvDLIuWmDA0+WfhsbI+vx+1QVkm+D/wNSQhgh
    DisplayFunction->Identity,
    Frame->True,
    FrameLabel->{{
-      FormBox["\"Time Delay (ns)\"", TraditionalForm], 
-      FormBox["\"\"", TraditionalForm]}, {
       FormBox["\"Counts per 60 seconds\"", TraditionalForm], 
+      FormBox["\"\"", TraditionalForm]}, {
+      FormBox["\"Time Delay (ns)\"", TraditionalForm], 
       FormBox[
       "\"\\!\\(\\*SubscriptBox[\\(S\\), \\(1\\)]\\) vs \\!\\(\\*SubscriptBox[\
 \\(S\\), \\(3\\)]\\)\"", TraditionalForm]}},
@@ -656,8 +658,8 @@ peR/QrBPvDLIuWmDA0+WfhsbI+vx+1QVkm+D/wNSQhgh
        Style[
         Text["Maximum when delay = 8 ns", {5.5, 22}], 15]}}, {
      Frame -> True, PlotRange -> {{0, 15}, {10, 60}}, 
-      FrameLabel -> {{"Time Delay (ns)", ""}, {
-        "Counts per 60 seconds", 
+      FrameLabel -> {{"Counts per 60 seconds", ""}, {
+        "Time Delay (ns)", 
          "\!\(\*SubscriptBox[\(S\), \(1\)]\) vs \!\(\*SubscriptBox[\(S\), \(3\
 \)]\)"}}, DisplayFunction -> Identity, PlotRangePadding -> {{
          Scaled[0.02], 
@@ -709,7 +711,7 @@ peR/QrBPvDLIuWmDA0+WfhsbI+vx+1QVkm+D/wNSQhgh
    3.7031408780557632`*^9, 3.7031409326661825`*^9}, {3.7031409884109354`*^9, 
    3.70314107415434*^9}, {3.7031411337506866`*^9, 3.7031411669060726`*^9}, {
    3.7031412134545307`*^9, 3.7031412331576085`*^9}, {3.703141303261114*^9, 
-   3.70314130802458*^9}}]
+   3.70314130802458*^9}, 3.7031416192943773`*^9}]
 }, Open  ]]
 },
 WindowSize->{1278, 1348},
@@ -730,8 +732,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 5081, 144, 481, "Input"],
-Cell[5664, 168, 27661, 543, 418, "Output"]
+Cell[580, 22, 5140, 146, 481, "Input"],
+Cell[5723, 170, 27685, 543, 421, "Output"]
 }, Open  ]]
 }
 ]
