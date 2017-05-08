@@ -183,5 +183,5 @@ if __name__ == '__main__':
         b = bins_to_midp(b)
         # Want to skip the first two bins.. Maybe theres an argument for this later...
         b,v = b[2:],v[2:]
-        ty_to_mathematica(b, v, "mathematica_format.txt", verbose=True)
+        ty_to_mathematica(b, v, "Data/mathematica_format.txt", verbose=True)
 
